@@ -1,0 +1,13 @@
+pathlib
+json
+re
+collections
+
+pandas
+numpy
+scipy
+
+matplotlib
+plotly
+
+tqdm

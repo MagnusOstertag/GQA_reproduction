@@ -1,11 +1,11 @@
 # GQA reproduction
 
-I have created two jupyter notebooks, one for reproducing the dataset balancing and one for the figures. The main findings are described below and for most of figure reproduction results I also provide bash-scripts to check and plausibilize the results of the notebook. The referenced version is [version 3 on arxiv](https://arxiv.org/abs/1902.09506).
+I have created two jupyter notebooks, one for reproducing the dataset balancing (`balancing.ipynb`) and one for the figures (`figures.ipynb`). The main findings are described below and for most of figure reproduction results I also provide bash-scripts to check and plausibilize the results of the notebook. The referenced version is [version 3 on arxiv](https://arxiv.org/abs/1902.09506).
 
 ## usage
 
 Use `download.sh` to get the `GQA` dataset. Using version 1.1 for this repo, as afterwards only further splits were added (which do not include the meta-data necessary for this analysis).
-And `pip install -r requirements.txt` to install the necessary packages, e.g. in a virtual environment `python3 -m venv venv`.
+And `pip install -r requirements.txt` to install the necessary packages, e.g. in a conda environment `conda create --prefix ./conda python=3.12` (tested with `python 3.12`).
 
 ## figures
 
@@ -36,8 +36,8 @@ And `pip install -r requirements.txt` to install the necessary packages, e.g. in
 
 After the balancing is done, two further downsampling steps are executed, which balance based on the `groups` and reject too similar questions.
 
-* the differences found with reproducing the balancing figures (see last bullet point)
-* the bounds on the parameters ($b$, $r_{min}$, $r_{max}$) for the balancing downsampling can't be reconstructed. Probably signifying that the downsampling based on their type and a filtering out of redundant questions after the balancing does significantly alter the properties.
+1. the differences found with reproducing the balancing figures (see last bullet point)
+2. the bounds on the parameters ($b$, $r_{min}$, $r_{max}$) for the balancing downsampling can't be reconstructed. Probably signifying that the downsampling based on their type and a filtering out of redundant questions after the balancing does significantly alter the properties.
     * notably, the relative frequency-based answer ranking after the whole balancing process
 
 ## compounding factors for the differences
