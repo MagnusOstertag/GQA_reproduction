@@ -1,7 +1,4 @@
 pathlib
-json
-re
-collections
 
 pandas
 numpy
@@ -11,3 +8,6 @@ matplotlib
 plotly
 
 tqdm
+
+notebook
+widgetsnbextension
