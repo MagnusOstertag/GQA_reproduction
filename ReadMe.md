@@ -17,11 +17,12 @@ Following the order of the figures in the supplemental:
 2. pie diagrams of the structural or semantic types, semantic steps (fig. 8, supplemental and fig. 6, main paper): qualitatively and quantitatively different diagrams
     * e.g. for the semantic type `relate` a share of 46.5% instead of 52%.
         * check with %TODO
-3. table of the function catalog (tab. 2, supplemental): the combinations of semantic and structural types are different getting the unique combinations of semantic and structural 
+3. table of the function catalog (tab. 2, supplemental, partly fig. 7 top right, supplemental): the combinations of semantic and structural types are different getting the unique combinations of semantic and structural 
     * e.g. `compare` <-> `attr` in the table, but in the data
         * check with %TODO
     * e.g. no `compare` to `object` in the data?
         * check with %TODO
+    * how are the question types derived: the question type distribution looks very different
     * also, in the header semantic and structural seems to be switched
 4. stacked bar visualization of the balancing (fig. 10, supplemental and fig. 5, main paper): different ranking and other significat differences for all but the upper left figure
     * no `car_modernity` (only `car_modern`) and `ground_table` in the data
@@ -29,8 +30,9 @@ Following the order of the figures in the supplemental:
     * GQA before balancing, local: e.g. for `man`, `car_modern`, and a lot of other labels.
     * e.g. "no" as the only answer for questions of answer type "man", making balancing impossible
         * check with `for file in {*_questions.json,train_all_questions/*questions_*.json}; do echo "File:$file"; jq -c 'map(select(.groups.local? == "03-man") | .answer) | unique' "$file"; echo; done`
-5. pie chart of the question semantic length (fig. 13, supplemental and partly fig. 6 main paper)
+5. pie chart of the question semantic steps (fig. 13, supplemental and partly fig. 6 main paper)
     * it's unclear how the semantic length is derived, defined as number of computation steps to arrive at the answer. It does not look like the length of the `semantic` field
+    * e.g. there are no questions with 1 reasoning step
     * check with: 
 6. table comparing `VQA 2.0` and `GQA` (tab. 3, supplemental): quantitatively different, but `VQA 2.0` only has a sum of the probabilites of $50 \%$
     * e.g. 19% short questions
