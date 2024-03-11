@@ -1,0 +1,6 @@
+{
+    "python.conda": "${workspaceFolder}/.conda/bin/python",
+    "python.pythonPath": "${workspaceFolder}/.conda/bin/python",
+    "python.defaultInterpreterPath": ".conda/bin/python",
+    "GitHub.copilot": ["ui"],
+}
