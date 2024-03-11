@@ -35,8 +35,12 @@ Following the order of the figures in the supplemental:
     * e.g. there are no questions with 1 reasoning step
     * check with: 
 6. table comparing `VQA 2.0` and `GQA` (tab. 3, supplemental): quantitatively different, but `VQA 2.0` only has a sum of the probabilites of $50 \%$
-    * e.g. 19% short questions
+    * e.g. the question length and std are different
         * check with %TODO
+    * e.g. much less `logical questions` found
+        * check with %TODO
+    * what does the compositional question mean?
+    * is `spatial` actually `verify`?
 
 ## balancing
 
