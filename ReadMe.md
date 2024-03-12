@@ -44,7 +44,7 @@ Following the order of the figures in the supplemental:
 5. pie chart of the question semantic steps (fig. 13, supplemental and partly fig. 6 main paper)
     * how is the semantic length is derived (defined as number of computation steps to arrive at the answer). It does not look like the length of the `semantic` field
     * e.g. there are no questions with 1 reasoning step
-        * check with 
+        * check heuristically with `jq '[.[] | select(.semantic | length == 1)] | length' train_balanced_questions.json`
 6. table comparing `VQA 2.0` and `GQA` (tab. 3, supplemental): quantitatively different, but `VQA 2.0` only has a sum of the probabilites of $50 \%$
     * e.g. the question length and std are different
         * check with %TODO
