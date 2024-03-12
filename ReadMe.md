@@ -22,15 +22,17 @@ Following the order of the figures in the supplemental:
         * `jq '[.[] | select(.question | startswith("Is there "))] | length' train_balanced_questions.json` -> 36805
     * there are (many) questions starting with `On which`
         * `jq '.[] | select(.question | startswith("On which "))' testdev_balanced_questions.json`
-        * `jq '[.[] | select(.question | startswith("On which "))] | length' testdev_balanced_questions.json`
+        * `jq '[.[] | select(.question | startswith("On which "))] | length' train_balanced_questions.json` -> 36280
 2. pie diagrams of the structural or semantic types, semantic steps (fig. 8, supplemental and fig. 6, main paper): qualitatively and quantitatively different diagrams
-    * e.g. for the semantic type `relate` a share of 46.5% instead of 52%.
-        * check with %TODO
+    * e.g. for the semantic type `relate` a share of $46.5%$ instead of $52%$, of `attribute` $31.9%$ instead of $28%$
+        * check with 
 3. table of the function catalog (tab. 2, supplemental, partly fig. 7 top right, supplemental): the combinations of semantic and structural types are different getting the unique combinations of semantic and structural 
-    * e.g. `compare` <-> `attr` in the table, but in the data
-        * check with %TODO
+    * e.g. no `compare` <-> `attr` in the table, but in the data
+        * check with `jq '[.[] | select(.types.structural == "compare" and .types.semantic == "attr")] | length' testdev_balanced_questions.json` -> $589$
     * e.g. no `compare` to `object` in the data?
-        * check with %TODO
+        * check heuristically with `jq '.[] | select(.types.structural == "compare" and .types.semantic == "obj")' train_balanced_questions.json`
+    * the combinations of `semantic` and `structural` are very different from the data
+        * `jq '[.[] | {semantic: .types.semantic, structural: .types.structural}] | unique' train_balanced_questions.json`
     * how are the question types derived? As they seem not to be `types:detailed`, but there is no other field applicable
     * also, in the header semantic and structural seem to be switched
 4. stacked bar visualization of the balancing (fig. 10, supplemental and fig. 5, main paper): different ranking and other significat differences for all but the upper left figure
