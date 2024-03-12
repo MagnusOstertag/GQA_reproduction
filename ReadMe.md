@@ -26,8 +26,8 @@ Following the order of the figures in the supplemental:
 2. pie diagrams of the structural or semantic types, semantic steps (fig. 8, supplemental and fig. 6, main paper): qualitatively and quantitatively different diagrams
     * e.g. for the semantic type `relate` a share of $46.5%$ instead of $52%$, of `attribute` $31.9%$ instead of $28%$
         * total: `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | keys | length] | add' "$file"; echo; done` -> sum: 1087640
-        * `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.semantic? == "rel")] | length' "$file"; echo; done` -> sum: 505906, ratio: $45.5$
-        * `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.semantic? == "attr")] | length' "$file"; echo; done` -> sum: 347716, ratio: $31.9$
+        * `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.semantic? == "rel")] | length' "$file"; echo; done` -> sum: 505906, ratio: $46.5\%$
+        * `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.semantic? == "attr")] | length' "$file"; echo; done` -> sum: 347716, ratio: $31.9\%$
 3. table of the function catalog (tab. 2, supplemental, partly fig. 7 top right, supplemental): the combinations of semantic and structural types are different getting the unique combinations of semantic and structural 
     * e.g. no `compare` <-> `attr` in the table, but in the data
         * check with `jq '[.[] | select(.types.structural == "compare" and .types.semantic == "attr")] | length' testdev_balanced_questions.json` -> $589$
@@ -48,10 +48,10 @@ Following the order of the figures in the supplemental:
     * e.g. there are no questions with 1 reasoning step
         * check heuristically with `jq '[.[] | select(.semantic | length == 1)] | length' train_balanced_questions.json`
 6. table comparing `VQA 2.0` and `GQA` (tab. 3, supplemental): quantitatively different, but `VQA 2.0` only has a sum of the probabilites of $50 \%$
-    * e.g. the question length and std are different
-        * check with %TODO
+    * e.g. the question length are different
+        * check heuristically with `jq '[.[] | .question | split(" ") | length] | add / length' train_balanced_questions.json` -> $8.76$
     * e.g. much less `logical questions` found
-        * check with %TODO
+        * check with `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.structural? == "logical")] | length' "$file"; echo; done` -> sum: 131928, ratio: $12.1\%$
     * what does the compositional question mean?
     * is `spatial` actually `verify`?
 
