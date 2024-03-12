@@ -12,8 +12,17 @@ And `pip install -r requirements.txt` to install the necessary packages, e.g. in
 Following the order of the figures in the supplemental:
 
 1. sunburst diagram of the first question words (fig. 7, supplemental): a qualitatively and quantitatively different diagram
-    * e.g. questions continuing "Are" with "the" instead of only "there"
+    * there are questions continuing `Are` with `the` instead of only `there`
         * check with `jq '.[] | select(.question | startswith("Are the "))' testdev_balanced_questions.json`
+    * `what is the` more often followed by `color` instead of `man`
+        * `jq '[.[] | select(.question | startswith("What is the color "))] | length' train_balanced_questions.json` -> 11321
+        * `jq '[.[] | select(.question | startswith("What is the man "))] | length' train_balanced_questions.json` -> 8378
+    * `is` is followed much more often by `the` instead of `there`
+        * `jq '[.[] | select(.question | startswith("Is the "))] | length' train_balanced_questions.json` -> 160065
+        * `jq '[.[] | select(.question | startswith("Is there "))] | length' train_balanced_questions.json` -> 36805
+    * there are (many) questions starting with `On which`
+        * `jq '.[] | select(.question | startswith("On which "))' testdev_balanced_questions.json`
+        * `jq '[.[] | select(.question | startswith("On which "))] | length' testdev_balanced_questions.json`
 2. pie diagrams of the structural or semantic types, semantic steps (fig. 8, supplemental and fig. 6, main paper): qualitatively and quantitatively different diagrams
     * e.g. for the semantic type `relate` a share of 46.5% instead of 52%.
         * check with %TODO
@@ -22,8 +31,8 @@ Following the order of the figures in the supplemental:
         * check with %TODO
     * e.g. no `compare` to `object` in the data?
         * check with %TODO
-    * how are the question types derived: the question type distribution looks very different
-    * also, in the header semantic and structural seems to be switched
+    * how are the question types derived? As they seem not to be `types:detailed`, but there is no other field applicable
+    * also, in the header semantic and structural seem to be switched
 4. stacked bar visualization of the balancing (fig. 10, supplemental and fig. 5, main paper): different ranking and other significat differences for all but the upper left figure
     * no `car_modernity` (only `car_modern`) and `ground_table` in the data
         * check with %TODO
