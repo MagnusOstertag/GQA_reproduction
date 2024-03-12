@@ -15,19 +15,19 @@ Following the order of the figures in the supplemental:
     * there are questions continuing `Are` with `the` instead of only `there`
         * check with `jq '.[] | select(.question | startswith("Are the "))' testdev_balanced_questions.json`
     * `what is the` more often followed by `color` instead of `man`
-        * `jq '[.[] | select(.question | startswith("What is the color "))] | length' train_balanced_questions.json` -> 11321
-        * `jq '[.[] | select(.question | startswith("What is the man "))] | length' train_balanced_questions.json` -> 8378
+        * `for file in {train_balanced_questions.json,val_balanced_questions.json,testdev_balanced_questions.json}; do echo "File:$file"; jq '[.[] | select(.question | startswith("What is the color "))] | length' "$file"; echo; done` -> sum: $13055$
+        * `for file in {train_balanced_questions.json,val_balanced_questions.json,testdev_balanced_questions.json}; do echo "File:$file"; jq '[.[] | select(.question | startswith("What is the man "))] | length' "$file"; echo; done` -> $9690$
     * `is` is followed much more often by `the` instead of `there`
-        * `jq '[.[] | select(.question | startswith("Is the "))] | length' train_balanced_questions.json` -> 160065
-        * `jq '[.[] | select(.question | startswith("Is there "))] | length' train_balanced_questions.json` -> 36805
+        * `jq '[.[] | select(.question | startswith("Is the "))] | length' train_balanced_questions.json` -> $160065$
+        * `jq '[.[] | select(.question | startswith("Is there "))] | length' train_balanced_questions.json` -> $36805$
     * there are (many) questions starting with `On which`
         * `jq '.[] | select(.question | startswith("On which "))' testdev_balanced_questions.json`
-        * `jq '[.[] | select(.question | startswith("On which "))] | length' train_balanced_questions.json` -> 36280
+        * `jq '[.[] | select(.question | startswith("On which "))] | length' train_balanced_questions.json` -> $36280$
 2. pie diagrams of the structural or semantic types, semantic steps (fig. 8, supplemental and fig. 6, main paper): qualitatively and quantitatively different diagrams
     * e.g. for the semantic type `relate` a share of $46.5%$ instead of $52%$, of `attribute` $31.9%$ instead of $28%$
-        * total: `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | keys | length] | add' "$file"; echo; done` -> sum: 1087640
-        * `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.semantic? == "rel")] | length' "$file"; echo; done` -> sum: 505906, ratio: $46.5\%$
-        * `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.semantic? == "attr")] | length' "$file"; echo; done` -> sum: 347716, ratio: $31.9\%$
+        * total: `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | keys | length] | add' "$file"; echo; done` -> sum: $1087640$
+        * `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.semantic? == "rel")] | length' "$file"; echo; done` -> sum: $505906$, ratio: $46.5\%$
+        * `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.semantic? == "attr")] | length' "$file"; echo; done` -> sum: $347716$, ratio: $31.9\%$
 3. table of the function catalog (tab. 2, supplemental, partly fig. 7 top right, supplemental): the combinations of semantic and structural types are different getting the unique combinations of semantic and structural 
     * e.g. no `compare` <-> `attr` in the table, but in the data
         * check with `jq '[.[] | select(.types.structural == "compare" and .types.semantic == "attr")] | length' testdev_balanced_questions.json` -> $589$
@@ -51,7 +51,7 @@ Following the order of the figures in the supplemental:
     * e.g. the question length are different
         * check heuristically with `jq '[.[] | .question | split(" ") | length] | add / length' train_balanced_questions.json` -> $8.76$
     * e.g. much less `logical questions` found
-        * check with `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.structural? == "logical")] | length' "$file"; echo; done` -> sum: 131928, ratio: $12.1\%$
+        * check with `for file in {*balanced_questions.json,}; do echo "File:$file"; jq '[.[] | select(.types.structural? == "logical")] | length' "$file"; echo; done` -> sum: $131928$, ratio: $12.1\%$
     * what does the compositional question mean?
     * is `spatial` actually `verify`?
 
@@ -71,7 +71,7 @@ After the balancing is done, two further downsampling steps are executed, which 
 * for the `structural type` in the changelog: "- 1.1: Updating the questions' functional programs. Fixing some typos." (ReadMe_questions)
     * but only for the `structural type` and only typos
 
-## Cite
+## cite
 
 ```
 @misc{hudson2019gqa,
