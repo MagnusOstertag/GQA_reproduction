@@ -62,17 +62,22 @@ Following the order of the figures in the supplemental:
 
 After the balancing is done, two further downsampling steps are executed, which balance based on the `groups` and reject too similar questions.
 
-1. the differences found with reproducing the balancing figures (see figures:4.)
-2. the bounds on the parameters ($b$, $r_{min}$, $r_{max}$) for the balancing downsampling can't be reconstructed. Probably signifying that the downsampling based on their type and a filtering out of redundant questions after the balancing does significantly alter the properties.
-    * notably, the relative frequency-based answer ranking after the whole balancing process
+1. the differences found when reproducing the balancing figures (see figures:4.)
+2. the bounds on the parameters ($b$, $r_{min}$, $r_{max}$) for the balancing downsampling can't be reconstructed. 
+3. the relative frequency-based answer ranking after the whole balancing process does not reflect the biases in the big GQA dataset ("This ensures that the relative frequency-based answer ranking stays the same." ~ p. 6)
+    * e.g. for the `local question group` named `table_on` the sampling from all the questions is very strange: `cake` is very seldomly taken, whereas `glass` is now frequently in the balanced dataset
+        * `cake` in balanced: `for file in {train_balanced_questions.json,val_balanced_questions.json,testdev_balanced_questions.json}; do echo "File:$file"; jq '[.[] | select(.groups.local? | type=="string" and contains("table_on,")) | select(.answer == "cake")] | length' "$file"; echo; done` -> sum: 23
+        * whereas in all: `for file in {testdev_all_questions.json,val_all_questions.json,train_all_questions/*questions_*.json}; do echo "File:$file"; jq '[.[] | select(.groups.local? | type=="string" and contains("table_on,")) | select(.answer == "cake")] | length' "$file"; echo; done` -> sum: 414
+        * `glass` in balanced: `for file in {train_balanced_questions.json,val_balanced_questions.json,testdev_balanced_questions.json}; do echo "File:$file"; jq '[.[] | select(.groups.local? | type=="string" and contains("table_on,")) | select(.answer == "glass")] | length' "$file"; echo; done` -> sum: 146
+        * whereas in all: `for file in {testdev_all_questions.json,val_all_questions.json,train_all_questions/*questions_*.json}; do echo "File:$file"; jq '[.[] | select(.groups.local? | type=="string" and contains("table_on,")) | select(.answer == "glass")] | length' "$file"; echo; done` -> sum: 239
+
+Probably this means that the downsampling based on their type and a filtering out of redundant questions after the balancing does significantly alter the properties.
 
 ## compounding factors for the differences
 
 * the split might change some properties
-    * not possible for `figures:1.`, `figures:4.`
-* the downsampling after the balancing significantly changes the properties of the balancing
+* the downsampling after the balancing could significantly changes the properties of the balancing
 * for the `structural type` in the changelog: "- 1.1: Updating the questions' functional programs. Fixing some typos." (ReadMe_questions)
-    * but only for the `structural type` and only typos
 
 ## cite
 
