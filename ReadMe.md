@@ -3,6 +3,7 @@
 I tried (and failed) to reproduce the main results of `Gqa: a new dataset for compositional question answering over real-world images` by Hudson et al.. The main findings are described below.
 To reproduce my steps, I have created two jupyter notebooks, one for reproducing the the figures (`figures.ipynb`) and one for the dataset balancing (`balancing.ipynb`). For most of the figure reproduction results I also provide bash-scripts to check and plausibilize the results of the notebook below.
 The referenced version of the GQA paper is [version 3 on arxiv](https://arxiv.org/abs/1902.09506).
+The resulting figures of the analysis can be found in the `results/` folder.
 
 ## Usage
 
