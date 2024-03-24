@@ -47,10 +47,8 @@ Following the order of the figures in the supplemental:
     * e.g. `no` as the only answer for questions of answer type "man", making balancing impossible
         * check with `for file in {*_questions.json,train_all_questions/*questions_*.json}; do echo "File:$file"; jq -c 'map(select(.groups.local? == "03-man") | .answer) | unique' "$file"; echo; done` -> in `testdev_all_questions.json`, `val_{all, balanced}_questions.json`, `train_all_questions_{0-9}.json`
 5. pie chart of the question semantic steps (fig. 13, supplemental and partly fig. 6 main paper)
-    * how is the semantic length is derived (defined as number of computation steps to arrive at the answer). It does not look like the length of the `semantic` field minus 1
-    * the ratios are super different e.g. for 1 compositional step:
-        * check heuristically with `jq '[.[] | select(.semantic | length == 2)] | length' train_balanced_questions.json` -> $263419$, ratio: $27.9%$
-        * with the total being `jq 'length' train_balanced_questions.json`
+    * how is "Is it sunny?" a one reasoning step question when the steps are `select` and `verify weather`?
+    * the ratios are quiet different
 6. table comparing `VQA 2.0` and `GQA` (tab. 3, supplemental): quantitatively different, but `VQA 2.0` only has a sum of the probabilites of $50 \%$
     * e.g. the question length are different
         * check heuristically with `jq '[.[] | .question | split(" ") | length] | add / length' train_balanced_questions.json` -> $8.76$
