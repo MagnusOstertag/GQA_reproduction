@@ -1,0 +1,8 @@
+Question length paper: 8.76 +/- 3.63
+Question length paper (without testdev): 8.76 +/- 3.64
+structural_type
+query      0.517565
+verify     0.206639
+choose     0.123005
+logical    0.121297
+compare    0.031494
