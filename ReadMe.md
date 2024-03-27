@@ -31,10 +31,9 @@ Following the order of the figures in the supplemental:
 3. table of the function catalog (tab. 2, supplemental, partly fig. 7 top right, supplemental): the unqiue combinations of semantic and structural types in the data are different from the combinations which should be generated from the catalog.
     * e.g. no `compare` <-> `attr` in the table, but in the data
         * check with `jq '[.[] | select(.types.structural == "compare" and .types.semantic == "attr")] | length' testdev_balanced_questions.json` -> $589$
-    * e.g. no `compare` to `object` in the data?
-        * check heuristically with `jq '.[] | select(.types.structural == "compare" and .types.semantic == "obj")' train_balanced_questions.json`
-    * the combinations of `semantic` and `structural` are very different from the data
-        * `jq '[.[] | {semantic: .types.semantic, structural: .types.structural}] | unique' train_balanced_questions.json`
+    * the combinations of `semantic` and `structural` of each `type` are somewhat from the data
+        * for `chooseGlobal` instead of `query` `choose`: `jq '[.[] | select(.groups.local? | type=="string" and startswith("02c-")) | {semantic: .types.semantic, structural: .types.structural}] | unique' train_balanced_questions.json`
+    * for "09*": questions of semantic type `compare` are only combined with `attr` instead of `obj`: `jq '[.[] | select(.groups.local? | type=="string" and startswith("09")) | {semantic: .types.semantic, structural: .types.structural}] | unique' train_balanced_questions.json`
     * also, in the header `semantic` and `structural` seem to be switched
 4. stacked bar visualization of the balancing (fig. 10, supplemental and fig. 5, main paper): different ranking and other significat differences for all but the upper left figure
     * no `car_modernity` (only `car_modern`) or `ground_type` in the data
